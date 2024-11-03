@@ -20,7 +20,7 @@ export const registerUser = async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
     res.cookie('token', token, {
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV === 'production',
       maxAge: 24 * 60 * 60 * 1000, 
       path: '/',
     });
@@ -52,7 +52,7 @@ export const loginUser = async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
     res.cookie('token', token, {
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV === 'production',
       maxAge: 24 * 60 * 60 * 1000, 
       path: '/',
     });
@@ -85,7 +85,7 @@ export const updateProfile = async (req, res) => {
 export const logoutUser = (req, res) => {
   res.cookie('token', '', {
     httpOnly: true,
-    secure: true,
+    secure: process.env.NODE_ENV === 'production',
     maxAge: 0, 
     path: '/',
   });
