@@ -131,7 +131,7 @@ export const updateTicketStatus = async (req, res) => {
     res.status(500).json({ message: 'Error updating ticket status', error: error.message });
   }
 };
-// Add this function in your ticketController.js
+
 export const getStatus = async (req, res) => {
   try {
     const ticket = await Ticket.findById(req.params.id);

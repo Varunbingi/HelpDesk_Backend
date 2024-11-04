@@ -28,6 +28,7 @@ export const registerUser = async (req, res) => {
 
     res.status(201).json({
       message: 'Registration successful',
+      token,
       user: { id: user._id, username: user.username, email: user.email,role:user.role },
     });
   } catch (error) {
@@ -59,7 +60,7 @@ export const loginUser = async (req, res) => {
       path: '/',
     });
 
-    res.json({ message: 'Login successful', user: { id: user._id, username: user.username, email: user.email,role:user.role } });
+    res.json({ message: 'Login successful',token, user: { id: user._id, username: user.username, email: user.email,role:user.role } });
   } catch (error) {
     console.error('Error logging in:', error.message);
     res.status(500).json({ message: 'Error logging in', error });
