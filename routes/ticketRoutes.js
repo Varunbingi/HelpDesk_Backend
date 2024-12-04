@@ -14,7 +14,7 @@ const router = express.Router();
 
 router.post('/', authMiddleware, createTicket);
 router.get('/', authMiddleware, getAllTickets);
-router.post('/:id/notes', authMiddleware,upload.single('file'), addNoteToTicket);
+router.post('/:id/notes', authMiddleware,upload.single('attachments'), addNoteToTicket);
 router.put('/:id/status', authMiddleware, updateTicketStatus);
 router.get('/:id/notes',authMiddleware,getNotesForTicket);
 router.get('/:id/status',authMiddleware,getStatus)

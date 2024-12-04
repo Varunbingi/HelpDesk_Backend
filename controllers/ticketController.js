@@ -52,28 +52,10 @@ export const addNoteToTicket = async (req, res, next) => {
     if (req.file) {
       try {
         
-        const result = await cloudinary.v2.uploader.upload_stream(
-          { folder: 'helpdesk', resource_type: 'auto' },
-          (error, result) => {
-            if (error) {
-              return next(new Error(error.message || 'File not uploaded, please try again'));
-            }
-            attachmentUrl = result.secure_url;
-          }
-        );
-
-        const stream = cloudinary.v2.uploader.upload_stream(
-          { folder: 'helpdesk', resource_type: 'auto' },
-          (error, result) => {
-            if (error) {
-              return next(new Error(error.message || 'File not uploaded, please try again'));
-            }
-            attachmentUrl = result.secure_url;
-          }
-        );
+       const result=await cloudinary.uploader.upload(req.file.path);
+       attachmentUrl=result.secure_url;
 
        
-        stream.end(req.file.buffer);
       } catch (error) {
         console.error('Cloudinary upload error:', error);
         return next(new Error(error.message || 'File not uploaded, please try again'));
